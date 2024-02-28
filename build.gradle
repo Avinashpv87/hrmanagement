@@ -1,0 +1,57 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+	id 'com.google.cloud.tools.jib' version '3.3.1'
+}
+
+jib.to.image = '056824153965.dkr.ecr.us-east-1.amazonaws.com/hrapps:1.0.8'
+
+group = 'com.saika'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.hibernate:hibernate-java8:5.6.12.Final'
+	//implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.1'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.1'
+	implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+springBoot {
+	buildInfo()
+	mainClass = 'com.saika.hrmanagement.HrmanagementApplication'
+}
+
+bootJar {
+	classifier = 'boot'
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.build.dependsOn tasks.jibDockerBuild
+

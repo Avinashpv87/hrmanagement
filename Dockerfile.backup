@@ -1,0 +1,6 @@
+FROM adoptopenjdk/openjdk11
+RUN mkdir -p /app
+#make use of the ecs tasks here
+COPY build/libs/hrmanagement-0.0.1-SNAPSHOT-boot.jar /app/app.jar
+EXPOSE 8888
+ENTRYPOINT ["java","-jar","/app/app.jar"]

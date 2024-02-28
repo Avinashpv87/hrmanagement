@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Password Reset Link</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+
+    <style>
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            display: inline-table !important;
+        }
+    </style>
+</head>
+ <body class="container">
+    <p th:text="${'Dear ' + name + ','}"></p>
+    </br>
+    <p>
+      <b> Your Timesheet has been Approved! </b>
+    </p>
+
+    <div >
+        <div class="row">
+            <table class="table table-responsive table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Date</th>
+                        <th>Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="task, iStat : ${dateTaskComments}">
+                        <td th:text="${iStat.index}+1"></td>
+                        <td th:text="${task.date}"></td>
+                        <td th:text="${task.hrs}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <h6>Approved Total Hours:</h6>  <b> <em th:text="${totalHours}"></em> </b>
+    </div>
+    <div class="row">
+        <h6> Approved By: </h6> <b>  <em th:text="${timesheet.approvedBy}"></em> </b>
+    </div>
+    <div class="row">
+        <h6> Approved At:</h6> <b> <em th:text="${timesheet.updatedOn}"></em></b>
+    </div>
+
+    <br/>
+    <div class="row">
+    <em>
+        Email generated on <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span>
+    </em>
+    </div>
+    <br/>
+    <div class="row">
+        <p>
+          Regards, <br />
+          <em th:text="${sign}"></em> <br />
+        </p>
+    </div>
+  </body>
+</html>

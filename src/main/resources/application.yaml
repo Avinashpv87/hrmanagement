@@ -1,0 +1,75 @@
+logging:
+    level:
+        org:
+            springframework:
+                data:
+                    mongodb:
+                        core:
+                            MongoTemplate: DEBUG
+#For sorting tags alphabetically
+springdoc:
+    swagger-ui:
+        tagsSorter: alpha
+api:
+    uri: terms-policy
+    description: HRM
+    version: 1.0
+    server:
+        local-url: http://localhost:8888
+        dev-url: https://hrm-apidev.saikatech.com/
+        test-url: http://3.91.102.229:8888
+tos:
+    uri: www.saika.com
+
+server:
+    port: 8888
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_trace_param
+    include-exception: false
+spring:
+    datasource:
+        continueOnError: false # continue even if can't be initialized
+    data:
+        mongodb:
+            #authentication-database: admin
+            database: admin
+            port: 27017
+            host: localhost
+
+    mail:
+        host: email-smtp.us-east-1.amazonaws.com
+        port: 587
+        username:
+        password:
+        tls: true
+        debug: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            connectiontimeout: 5000
+            timeout: 5000
+            writetimeout: 5000
+
+    main:
+        allow-circular-references: true
+    servlet:
+        multipart:
+            max-file-size: 2MB
+            max-request-size: 2MB
+app:
+    hostname: http://localhost:4200
+    jwt:
+        secret: 12344455
+        tokenValidityInMs: 86400
+        emailExpiryInMs: 86400
+        userActiveExpiryInMs: 86400
+    email:
+        from: no-reply@mytime.saikatech.com
+        subject:
+            reset: Password Reset
+            register: User Registration
+            enrollment: Employee Enrollment
+            reminder: SaikaTech - Reminder Email!
+        sign: Saika Technologies Inc.,
+        location: United States

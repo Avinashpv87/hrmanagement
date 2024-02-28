@@ -1,0 +1,40 @@
+openapi: 3.0.1
+info:
+  title: On Boarding Employee API
+  description: HR Management, On Boarding Resource, Timesheet and etc.,
+  termsOfService: www.saika.com
+  contact:
+    name: Saika
+    url: https://www.saika.com
+    email: support@saika.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: "1.0"
+servers:
+  - url: http://localhost:8888
+    description: Production
+tags:
+  - name: Employee Timesheet
+    description: The EmployeeTimesheet Management API
+  - name: Client
+    description: The Client Management API
+  - name: Test
+    description: The Test API
+  - name: User
+    description: The User Management API
+paths:
+  /test:
+    get:
+      tags:
+        - Test
+      summary: Test App by running this api
+      description: Test App is Running!
+      operationId: welcomeToTimeSheet
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
